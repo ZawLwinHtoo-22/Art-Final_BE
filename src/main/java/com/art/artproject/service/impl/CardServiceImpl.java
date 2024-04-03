@@ -6,7 +6,6 @@ import com.art.artproject.dto.UserNameResponse;
 import com.art.artproject.entity.Card;
 import com.art.artproject.entity.Category;
 
-import com.art.artproject.entity.FileUtils;
 import com.art.artproject.entity.User;
 import com.art.artproject.repo.CardRepo;
 import com.art.artproject.repo.CategoryRepo;
@@ -16,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -40,7 +38,6 @@ public class CardServiceImpl implements CardService {
     }
 
 
-    public FileUtils utils;
 
 
 //    @Override

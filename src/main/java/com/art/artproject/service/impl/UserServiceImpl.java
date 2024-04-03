@@ -5,7 +5,6 @@ import com.art.artproject.cache.OTPCache;
 import com.art.artproject.constant.EmailConstant;
 import com.art.artproject.domain.OTPValidateRequest;
 import com.art.artproject.dto.*;
-import com.art.artproject.entity.FileUtils;
 import com.art.artproject.entity.User;
 import com.art.artproject.entity.UserInfo;
 import com.art.artproject.repo.UserRepo;
@@ -17,7 +16,6 @@ import jakarta.mail.Session;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,8 +32,6 @@ public class UserServiceImpl implements UserService {
     private ModelMapper mapper;
 
     private final EmailUtil emailUtil;
-
-    private FileUtils utils;
 
     public UserServiceImpl(EmailUtil emailUtil) {
         this.emailUtil = emailUtil;
