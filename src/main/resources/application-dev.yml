@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:final_DB
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+      type:
+        wrapper_array_handling:ALLOW
+  h2:
+    console:
+      enabled: true
+
+
+
+
