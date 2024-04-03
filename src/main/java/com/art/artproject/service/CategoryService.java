@@ -16,7 +16,5 @@ public interface CategoryService {
 
     public Category update(Long id,NewCategoryRequest request);
 
-    List<Category> showWithType(Long categoryId);
-
     Long countCategories();
 }

@@ -11,6 +11,4 @@ import lombok.*;
 public class PaymentRequest {
 
     private Double amount;
-    private Long card_ID;
-
 }

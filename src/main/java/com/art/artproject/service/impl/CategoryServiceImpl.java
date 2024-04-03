@@ -23,28 +23,12 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepo categoryRepo;
 
     @Autowired
-    private CategoryService categoryService;
-
     private ModelMapper mapper;
     @Override
     public CategoryResponse saveNewCategory(NewCategoryRequest request) {
         Category category=Category.of(request);
         return mapper.map(categoryRepo.save(category),CategoryResponse.class);
     }
-
-    @Override
-    public List<Category> showWithType(Long category_id) {
-
-        List<Category> categories=categoryService.findAll();
-        List<Category> filterCategories=new ArrayList<>();
-        for(Category category: categories){
-            if (category.getId()==category_id){
-                filterCategories.add(category);
-            }
-        }
-        return filterCategories;
-    }
-
 
     @Override
     public List<Category> findAll() {
@@ -66,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(category.isPresent()){
             Category category1=category.get();
             category1.setName(request.getName());
-
+            return categoryRepo.save(category1);
         }
         return null;
 //        authorRepo.save(AuthorRequest.getAuthor(authorRequest));
@@ -75,6 +59,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Long countCategories() {
 
-            return categoryRepo.count();
-        }
+        return categoryRepo.count();
     }
+}

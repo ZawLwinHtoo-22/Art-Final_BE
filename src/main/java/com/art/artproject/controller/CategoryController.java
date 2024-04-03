@@ -19,6 +19,7 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
     @PostMapping
     public ResponseEntity<TalentResponse<CategoryResponse>> saveNewCategory(@RequestBody NewCategoryRequest request) {  // @RequestBody annotation is used to bind the parameter with the body of the HTTP request
         TalentResponse<CategoryResponse> talentResponse=
@@ -33,7 +34,6 @@ public class CategoryController {
         Category result = categoryService.update(id,request);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategory(){
         List<Category> categoryList = categoryService.findAll();
@@ -48,11 +48,6 @@ public class CategoryController {
         return new ResponseEntity<>(" Deleted By Id " + id, HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<Category>> showWithType(@RequestParam Long category_id){
-        List<Category> categories=categoryService.showWithType(category_id);
-        return new ResponseEntity<>(categories,HttpStatus.OK);
-    }
 
     @GetMapping("/count")
     public ResponseEntity<Long> countCards(){

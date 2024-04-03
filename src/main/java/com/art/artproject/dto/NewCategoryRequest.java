@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class NewCategoryRequest {
+
     private String name;
 
     public static Category getCategory(NewCategoryRequest request) {
