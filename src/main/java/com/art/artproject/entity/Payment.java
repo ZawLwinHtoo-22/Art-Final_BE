@@ -17,6 +17,7 @@ public class Payment {
     private Long id;
     private Double amount;
 
+
     @OneToOne
     @JoinColumn(name = "card_id")
     private Card card;

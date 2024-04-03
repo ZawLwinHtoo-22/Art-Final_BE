@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,15 +25,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryService categoryService;
 
-
-
-    @Autowired
     private ModelMapper mapper;
     @Override
     public CategoryResponse saveNewCategory(NewCategoryRequest request) {
         Category category=Category.of(request);
         return mapper.map(categoryRepo.save(category),CategoryResponse.class);
     }
+
     @Override
     public List<Category> showWithType(Long category_id) {
 
@@ -45,6 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return filterCategories;
     }
+
 
     @Override
     public List<Category> findAll() {
@@ -66,13 +66,15 @@ public class CategoryServiceImpl implements CategoryService {
         if(category.isPresent()){
             Category category1=category.get();
             category1.setName(request.getName());
-            return category1;
+
         }
         return null;
 //        authorRepo.save(AuthorRequest.getAuthor(authorRequest));
     }
 
+    @Override
+    public Long countCategories() {
 
-
-
-}
+            return categoryRepo.count();
+        }
+    }

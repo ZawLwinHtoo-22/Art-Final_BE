@@ -3,7 +3,6 @@ package com.art.artproject.controller;
 import com.art.artproject.domain.TalentResponse;
 import com.art.artproject.dto.CategoryResponse;
 import com.art.artproject.dto.NewCategoryRequest;
-import com.art.artproject.entity.Card;
 import com.art.artproject.entity.Category;
 import com.art.artproject.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +47,17 @@ public class CategoryController {
 
         return new ResponseEntity<>(" Deleted By Id " + id, HttpStatus.NO_CONTENT);
     }
+
     @GetMapping("/filter")
     public ResponseEntity<List<Category>> showWithType(@RequestParam Long category_id){
         List<Category> categories=categoryService.showWithType(category_id);
         return new ResponseEntity<>(categories,HttpStatus.OK);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countCards(){
+        Long count=categoryService.countCategories();
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
 
 }

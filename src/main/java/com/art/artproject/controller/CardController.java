@@ -31,16 +31,7 @@ public class CardController {
 //        NewCardRequest request = gson.fromJson(requestString, NewCardRequest.class);
 
 
-//    @PostMapping
-//    public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam String requestString){
-//
-//        Gson gson = new Gson();
-//        NewCardRequest request = gson.fromJson(requestString, NewCardRequest.class);
-//        Card card=cardService.createCard( user_id,imageFile, request);
-//        TalentResponse response=
-//                new TalentResponse(card,"Successfully created", HttpStatus.CREATED);
-//        return new ResponseEntity<>(response,HttpStatus.CREATED);
-//    }
+
 
     @PostMapping
     public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id,@RequestBody NewCardRequest request){
@@ -62,11 +53,23 @@ public class CardController {
         return new ResponseEntity<>(cards,HttpStatus.OK);
     }
 
+
     @GetMapping("/find")
     public ResponseEntity<Card> showById(@RequestParam Long card_id){
         Card card = cardService.showWithId(card_id);
         return new ResponseEntity<>(card,HttpStatus.OK);
 
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteCard(@RequestParam Long id){
+        cardService.deleteCard(id);
+        return new ResponseEntity<>("Successfully Deleted",HttpStatus.OK);
+    }
+    @GetMapping("/count")
+    public ResponseEntity<Long> countCards(){
+        Long count=cardService.countCards();
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
 
 

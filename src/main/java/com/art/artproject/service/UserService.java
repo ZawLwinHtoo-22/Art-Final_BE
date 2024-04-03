@@ -15,8 +15,12 @@ public interface UserService {
 
     List<User> showAll();
 
-    void verifyMailToRegister(String mail);
+    VerifyMailResponse verifyMailToRegister(VerifyMailRequest request);
 
     boolean validateOTP(OTPValidateRequest request);
 
+    Long countUsers();
+    User updateUser(Long id,PasswordRequest request);
+
+    void deleteUser (Long id);
 }

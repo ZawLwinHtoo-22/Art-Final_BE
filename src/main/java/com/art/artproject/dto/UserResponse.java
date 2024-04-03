@@ -3,8 +3,6 @@ package com.art.artproject.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Blob;
-
 @Getter
 @Setter
 public class UserResponse {
