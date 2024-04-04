@@ -1,6 +1,4 @@
 package com.art.artproject.dto;
-
-import com.art.artproject.entity.Payment;
 import lombok.*;
 
 @Getter
@@ -11,4 +9,5 @@ import lombok.*;
 public class PaymentRequest {
 
     private Double amount;
+    private Boolean disabled;
 }

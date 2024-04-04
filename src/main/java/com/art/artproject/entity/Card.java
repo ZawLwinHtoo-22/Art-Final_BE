@@ -22,19 +22,6 @@ public class Card {
     private String userName;
 
 
-//    Byte[] FileData = new Byte[imageFile.length];
-//    for (int i = 0; i < imageFile.length; i++) {
-//        FileData[i] = imageFile[i];
-//    }
-//    public Byte[] getimageFile() {
-//        return Arrays.stream(imageFile)
-//                .sorted()
-//                .toArray(Byte[]::new);
-//    }
-//    public void setimageFile(Byte[] imageFile) {
-//        this.imageFile = imageFile;
-//    }
-
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="user_id")
