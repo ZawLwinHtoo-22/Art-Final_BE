@@ -22,9 +22,9 @@ public class FavouriteController {
     private FavouriteService favouriteService;
 
     @PostMapping
-    public ResponseEntity<TalentResponse<Favourite>> doFavourite (@RequestParam Long user_id,Long card_id){
-        Favourite favourite = favouriteService.doFavourite(user_id,card_id);
-        TalentResponse response =
+    public ResponseEntity<TalentResponse<Favourite>> doFavourite (@RequestParam Long user_id,Long card_id,@RequestBody FavouriteRequest request){
+        Favourite favourite = favouriteService.doFavourite(user_id,card_id,request);
+        TalentResponse<Favourite> response =
                 new TalentResponse<>(favourite, "Success favourite", HttpStatus.CREATED);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

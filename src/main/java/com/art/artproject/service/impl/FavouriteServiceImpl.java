@@ -71,8 +71,8 @@ public class FavouriteServiceImpl implements FavouriteService {
 //    }
 
     @Override
-    public Favourite doFavourite(Long user_id, Long card_id) {
-        Favourite favourite=new Favourite();
+    public Favourite doFavourite(Long user_id, Long card_id,FavouriteRequest request) {
+        Favourite favourite=mapper.map(request,Favourite.class);
         User user=userRepo.findById(user_id).get();
         Card card=cardRepo.findById(card_id).get();
         favourite.setUser(user);
