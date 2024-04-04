@@ -60,15 +60,13 @@ public class UserController {
                 new TalentResponse<>(verifyMailResponse,"Successfully verify by email",HttpStatus.OK);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
-
-   @PostMapping("/validateOTP")
+    @PostMapping("/validateOTP")
     public ResponseEntity<TalentResponse<Boolean>> validateOTP(@RequestBody OTPValidateRequest request){
         boolean isValidate = userService.validateOTP(request);
-         TalentResponse<Boolean> response =
-                 new TalentResponse<>(isValidate, "Ok", HttpStatus.OK);
-         return ResponseEntity.ok(response);
-   }
-
+        TalentResponse<Boolean> response =
+                new TalentResponse<>(isValidate, "Ok", HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
     @GetMapping("/count")
     public ResponseEntity<Long> countCards(){
         Long count=userService.countUsers();
