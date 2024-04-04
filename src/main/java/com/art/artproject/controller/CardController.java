@@ -21,26 +21,6 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-//    @PostMapping
-//    public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam String requestString){
-//    public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id, @RequestParam("imageFile") MultipartFile imageFile,
-//                                                     @RequestParam("imageTitle") String imageTitle, @RequestParam("price") Double price){
-//
-//         convert requestString to request
-//        Gson gson = new Gson();
-//        NewCardRequest request = gson.fromJson(requestString, NewCardRequest.class);
-
-
-//    @PostMapping
-//    public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam String requestString){
-//
-//        Gson gson = new Gson();
-//        NewCardRequest request = gson.fromJson(requestString, NewCardRequest.class);
-//        Card card=cardService.createCard( user_id,imageFile, request);
-//        TalentResponse response=
-//                new TalentResponse(card,"Successfully created", HttpStatus.CREATED);
-//        return new ResponseEntity<>(response,HttpStatus.CREATED);
-//    }
 
     @PostMapping
     public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id,@RequestBody NewCardRequest request){

@@ -2,11 +2,8 @@ package com.art.artproject.controller;
 
 import com.art.artproject.domain.OTPValidateRequest;
 
-import com.art.artproject.dto.NewCardRequest;
-import com.art.artproject.dto.NewUserRequest;
+import com.art.artproject.dto.*;
 import com.art.artproject.domain.TalentResponse;
-import com.art.artproject.dto.UserResponse;
-import com.art.artproject.dto.UserValidateRequest;
 import com.art.artproject.entity.User;
 import com.art.artproject.entity.UserInfo;
 import com.art.artproject.service.UserService;
@@ -48,16 +45,36 @@ public class UserController {
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
 
-   @GetMapping("/verify")
-    public void verifyEmail(@RequestParam String mail){
-        userService.verifyMailToRegister(mail);
-   }
-
-   @PostMapping("/validateOTP")
+    @PostMapping("/verify")
+    public ResponseEntity<TalentResponse<VerifyMailResponse>> verifyEmail(@RequestBody VerifyMailRequest request){
+        VerifyMailResponse verifyMailResponse=userService.verifyMailToRegister(request);
+        TalentResponse<VerifyMailResponse> response=
+                new TalentResponse<>(verifyMailResponse,"Successfully verify by email",HttpStatus.OK);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+    @PostMapping("/validateOTP")
     public ResponseEntity<TalentResponse<Boolean>> validateOTP(@RequestBody OTPValidateRequest request){
         boolean isValidate = userService.validateOTP(request);
-         TalentResponse<Boolean> response =
-                 new TalentResponse<>(isValidate, "Ok", HttpStatus.OK);
-         return ResponseEntity.ok(response);
-   }
+        TalentResponse<Boolean> response =
+                new TalentResponse<>(isValidate, "Ok", HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/count")
+    public ResponseEntity<Long> countCards(){
+        Long count=userService.countUsers();
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
+    @PutMapping
+    public ResponseEntity<TalentResponse<User>> updateUser(@RequestParam Long id,@RequestBody PasswordRequest passwordRequest){
+        User user=userService.updateUser(id,passwordRequest);
+        TalentResponse<User> response=
+                new TalentResponse<>(user,"Successfully updated",HttpStatus.OK);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteUser(@RequestParam Long id){
+        userService.deleteUser(id);
+        return new ResponseEntity<>("Successfully deleted",HttpStatus.OK);
+    }
 }
