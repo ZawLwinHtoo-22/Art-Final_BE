@@ -65,10 +65,13 @@ public class UserServiceImpl implements UserService {
         return userRepo.findAll();
     }
 
+
     @Override
     public VerifyMailResponse verifyMailToRegister(VerifyMailRequest request) {
         final Optional<User> user = userRepo.findUsersByMail(request.getMail());
         VerifyMailResponse verifyMailResponse=mapper.map(request,VerifyMailResponse.class);
+        verifyMailResponse.setId(user.get().getId());
+
         if (user.isPresent()) {
             // code generate
             // send the generated code to mail
@@ -93,6 +96,7 @@ public class UserServiceImpl implements UserService {
         return verifyMailResponse;
 
     }
+
     @Override
     public boolean validateOTP(OTPValidateRequest request) {
         boolean isValidate = false;
