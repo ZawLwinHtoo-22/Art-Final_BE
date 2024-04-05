@@ -20,6 +20,7 @@ public class Card {
     private Double price;
     private String description;
     private String userName;
+    private Boolean status=false;
 
 
 //    Byte[] FileData = new Byte[imageFile.length];

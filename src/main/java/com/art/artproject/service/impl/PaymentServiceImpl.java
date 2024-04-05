@@ -36,9 +36,14 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = mapper.map(paymentRequest, Payment.class);
         Optional<Card> card = cardRepo.findById(card_id);
         Optional<User> user = userRepo.findById(user_id);
-        payment.setCard(card.get());
+            Card card1=card.get();
+            card1.setStatus(true);
+            cardRepo.save(card1);
+        payment.setCard(card1);
         payment.setUser(user.get());
         payment.setAmount(card.get().getPrice());
+
+
         return paymentRepo.save(payment);
     }
 
