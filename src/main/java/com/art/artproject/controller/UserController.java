@@ -4,6 +4,11 @@ import com.art.artproject.domain.OTPValidateRequest;
 
 import com.art.artproject.dto.*;
 import com.art.artproject.domain.TalentResponse;
+
+import com.art.artproject.dto.UserResponse;
+import com.art.artproject.dto.UserValidateRequest;
+
+
 import com.art.artproject.entity.User;
 import com.art.artproject.entity.UserInfo;
 import com.art.artproject.service.UserService;
@@ -14,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -32,6 +38,7 @@ public class UserController {
         UserResponse user = userService.registerUser(request);
         TalentResponse<UserResponse> response=
                 new TalentResponse<>(user, "Successfully registered", HttpStatus.CREATED );
+
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     @PostMapping("/validate")
@@ -44,6 +51,14 @@ public class UserController {
         List<User> users=userService.showAll();
         return new ResponseEntity<>(users,HttpStatus.OK);
     }
+
+//    @PostMapping("/verify")
+//    public ResponseEntity<TalentResponse<VerifyMailResponse>> verifyEmail(@RequestBody VerifyMailRequest request){
+//        VerifyMailResponse verifyMailResponse=userService.verifyMailToRegister(request);
+//        TalentResponse<VerifyMailResponse> response=
+//                new TalentResponse<>(verifyMailResponse,"Successfully verify by email",HttpStatus.OK);
+//        return new ResponseEntity<>(response,HttpStatus.OK);
+//    }
 
     @PostMapping("/verify")
     public ResponseEntity<TalentResponse<VerifyMailResponse>> verifyEmail(@RequestBody VerifyMailRequest request){
@@ -78,3 +93,5 @@ public class UserController {
         return new ResponseEntity<>("Successfully deleted",HttpStatus.OK);
     }
 }
+
+

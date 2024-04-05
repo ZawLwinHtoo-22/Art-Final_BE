@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     private final EmailUtil emailUtil;
 
+
     public UserServiceImpl(EmailUtil emailUtil) {
         this.emailUtil = emailUtil;
     }
@@ -65,9 +66,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void verifyMailToRegister(String mail) {
-        final Optional<User> user = userRepo.findUsersByMail(mail);
-        if(user.isPresent()){
+    public VerifyMailResponse verifyMailToRegister(VerifyMailRequest request) {
+        final Optional<User> user = userRepo.findUsersByMail(request.getMail());
+        VerifyMailResponse verifyMailResponse=mapper.map(request,VerifyMailResponse.class);
+        verifyMailResponse.setId(user.get().getId());
+
+        if (user.isPresent()) {
             // code generate
             // send the generated code to mail
 
@@ -80,20 +84,17 @@ public class UserServiceImpl implements UserService {
             System.out.println("Generating secret key");
             System.out.println(r);
 
-            send(mail, "Your one time password is "+ r);
+            send(request.getMail(), "Your one time password is " + r);
 
-            OTP otp = new OTP(mail, Integer.toString(r), LocalDateTime.now().plusMinutes(1));
+            OTP otp = new OTP(request.getMail(), Integer.toString(r), LocalDateTime.now().plusMinutes(1));
             OTPCache.saveOTP(otp);
 
-
-        }else{
-
-
-            throw new RuntimeException("UserName not Found`q");
-
+        } else {
+            throw new RuntimeException("UserName not Found");
         }
-    }
+        return verifyMailResponse;
 
+    }
     @Override
     public boolean validateOTP(OTPValidateRequest request) {
         boolean isValidate = false;
@@ -109,6 +110,23 @@ public class UserServiceImpl implements UserService {
             }
         }
         return isValidate;
+    }
+
+    @Override
+    public Long countUsers() {
+        return userRepo.count();
+    }
+
+    @Override
+    public User updateUser(Long id,PasswordRequest request) {
+        Optional<User> user=userRepo.findById(id);
+        if(user.isPresent()){
+            User user1=user.get();
+            user1.setPassword(request.getPassword());
+            return userRepo.save(user1);
+        }
+
+        return null;
     }
 
     private void send(String toEmail, String subject){
@@ -135,6 +153,13 @@ public class UserServiceImpl implements UserService {
 
         Session session = Session.getInstance(properties, auth);
         emailUtil.sendEmail(session, toEmail, subject);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        if(userRepo.existsById(id)){
+            userRepo.deleteById(id);
+        }
     }
 
 }

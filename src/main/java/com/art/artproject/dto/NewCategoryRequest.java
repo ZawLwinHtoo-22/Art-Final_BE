@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class NewCategoryRequest {
+
     private String name;
 
     public static Category getCategory(NewCategoryRequest request) {
@@ -19,12 +20,4 @@ public class NewCategoryRequest {
                 .build();
     }
 
-//    public static Author getAuthor(AuthorRequest authorRequest) {
-//        return new Author()
-//                .builder()
-//                .id(authorRequest.getId())
-//                .name(authorRequest.getName())
-//                .topic(authorRequest.getTopic())
-//                .build();
-//    }
 }

@@ -1,11 +1,9 @@
-
-        package com.art.artproject.service.impl;
+package com.art.artproject.service.impl;
 
 import com.art.artproject.dto.NewCardRequest;
 import com.art.artproject.dto.UserNameResponse;
 import com.art.artproject.entity.Card;
 import com.art.artproject.entity.Category;
-
 import com.art.artproject.entity.User;
 import com.art.artproject.repo.CardRepo;
 import com.art.artproject.repo.CategoryRepo;
@@ -15,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.*;
 
@@ -37,27 +37,6 @@ public class CardServiceImpl implements CardService {
         this.objectMapper = objectMapper;
     }
 
-
-
-
-//    @Override
-//    public Card createCard(Long user_id, MultipartFile imageFile, NewCardRequest request) {
-//        Card card=mapper.map(request,Card.class);
-//        Optional<User> user=userRepo.findById(user_id);
-//        Optional<UserNameResponse> userNameResponseOptional = userRepo.findUserNameById(user_id);
-//        if (userNameResponseOptional.isPresent()) {
-//            UserNameResponse userNameResponse = userNameResponseOptional.get();
-//            card.setUserName(userNameResponse.getUserName());
-//        } else {
-//            throw new NoSuchElementException("Username response not found for user ID: " + user_id);
-//        }
-//        Category category=categoryRepo.findById(request.getCategory_id()).get();
-//        card.setUser(user.get());
-//        card.setCategory(category);
-//        card.setImageFile(utils.save(imageFile));
-//        card.setPrice(request.getPrice());
-//        return cardRepo.save(card);
-//    }
 
 
     @Override
@@ -102,6 +81,18 @@ public class CardServiceImpl implements CardService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid ID  " + card_id));
     }
 
+    @Override
+    public void deleteCard(Long id) {
+        if(cardRepo.existsById(id)){
+            cardRepo.deleteById(id);
+        }
+    }
 
+
+    @Override
+    public Long countCards() {
+        return cardRepo.count();
+    }
 
 }
+

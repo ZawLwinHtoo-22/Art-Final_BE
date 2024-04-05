@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AdminInfo {
+
     private Long id;
     private String mail;
     private String password;

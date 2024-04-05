@@ -18,6 +18,4 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("SELECT new com.art.artproject.dto.UserNameResponse(u.userName) FROM User u WHERE u.id = :id")
     Optional<UserNameResponse> findUserNameById(@Param("id") Long id);
 
-
-
 }

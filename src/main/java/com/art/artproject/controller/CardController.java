@@ -22,6 +22,7 @@ public class CardController {
     private CardService cardService;
 
 
+
     @PostMapping
     public ResponseEntity<TalentResponse> createCard(@RequestParam Long user_id,@RequestBody NewCardRequest request){
 
@@ -42,11 +43,23 @@ public class CardController {
         return new ResponseEntity<>(cards,HttpStatus.OK);
     }
 
+
     @GetMapping("/find")
     public ResponseEntity<Card> showById(@RequestParam Long card_id){
         Card card = cardService.showWithId(card_id);
         return new ResponseEntity<>(card,HttpStatus.OK);
 
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteCard(@RequestParam Long id){
+        cardService.deleteCard(id);
+        return new ResponseEntity<>("Successfully Deleted",HttpStatus.OK);
+    }
+    @GetMapping("/count")
+    public ResponseEntity<Long> countCards(){
+        Long count=cardService.countCards();
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
 
 

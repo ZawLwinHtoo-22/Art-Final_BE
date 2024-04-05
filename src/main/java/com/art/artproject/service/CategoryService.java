@@ -2,7 +2,6 @@ package com.art.artproject.service;
 
 import com.art.artproject.dto.CategoryResponse;
 import com.art.artproject.dto.NewCategoryRequest;
-import com.art.artproject.entity.Card;
 import com.art.artproject.entity.Category;
 
 import java.util.List;
@@ -17,7 +16,5 @@ public interface CategoryService {
 
     public Category update(Long id,NewCategoryRequest request);
 
-
-    List<Category> showWithType(Long categoryId);
-
+    Long countCategories();
 }
