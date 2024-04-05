@@ -15,12 +15,11 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String image;
-
     private String imageTitle;
     private Double price;
     private String description;
     private String userName;
-    private Boolean status;
+    private Boolean status = false;
 
 
 

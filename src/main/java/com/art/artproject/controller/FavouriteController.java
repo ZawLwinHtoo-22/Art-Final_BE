@@ -41,4 +41,5 @@ public class FavouriteController {
         favouriteService.deleteFavourite(id);
         return new ResponseEntity<>("Successfully deleted", HttpStatus.OK);
     }
+
 }

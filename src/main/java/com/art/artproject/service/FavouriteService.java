@@ -8,4 +8,6 @@ public interface FavouriteService {
     Favourite doFavourite(Long user_id,Long card_id,FavouriteRequest request);
     List<Favourite> showAll();
     void deleteFavourite(Long id);
+
+
 }
